@@ -9,31 +9,26 @@ public class Main3 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String line = br.readLine();
-		String[] input = line.split("");
-
-		int num =0;
+		char[] input = line.toCharArray();
 
 		int b =0;
 		int g =0;
 		int r =0;
-		for (String color:input){
-			if(color.equals("B")){
+		for (char color:input){
+			if(color=='B'){
 				b++;
-			} else if (color.equals("G")){
+			} else if (color=='G'){
 				g++;
-			} else if (color.equals("R")){
+			} else if (color=='R'){
 				r++;
 			}
 		}
-		if(b%2==1){
-			num++;
-		}
-		if(g%2==1){
-			num++;
-		}
-		if(r%2==1){
-			num++;
-		}
+
+		int num =0;
+		num += b % 2;
+		num += g % 2;
+		num += r % 2;
+
 		System.out.println(num);
 	}
 }

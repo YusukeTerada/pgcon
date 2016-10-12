@@ -14,11 +14,8 @@ public class Main1 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		String line = br.readLine();
-		String[] out = line.split("");
-		for (int i=out.length-1; i>=0; i--){
-//			if (!out[i].equals(" ")&&!out[i].equals("　")){
-				System.out.print(out[i]);
-//			}
+		for (int i=line.length()-1; i>=0; i--){
+				System.out.print(line.charAt(i));
 		}
 		System.out.println("");
 	}

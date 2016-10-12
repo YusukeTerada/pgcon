@@ -8,6 +8,9 @@ import java.util.Collections;
 
 public class Main2 {
 
+	static final String SEP = ",";
+	static final String TRUMP_NUM = "A234567890JQK";
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String line = br.readLine();
@@ -18,100 +21,48 @@ public class Main2 {
 		ArrayList <Integer> cList = new ArrayList<Integer>();
 		ArrayList <Integer> hList = new ArrayList<Integer>();
 
-		for (int cnt=0; cnt<cards.length; cnt++){
-			String[] card = cards[cnt].split("");
-
-			if(card[0].equals("S")){
-				sList.add(numChange(card[1]));
-			} else if(card[0].equals("D")){
-				dList.add(numChange(card[1]));
-			} else if(card[0].equals("C")){
-				cList.add(numChange(card[1]));
-			} else if(card[0].equals("H")){
-				hList.add(numChange(card[1]));
+		for (String str : cards){
+			char[] card = str.toCharArray();
+			if(card[0]=='S'){
+				sList.add(convertStrToNum(card[1]));
+			} else if(card[0]=='D'){
+				dList.add(convertStrToNum(card[1]));
+			} else if(card[0]=='C'){
+				cList.add(convertStrToNum(card[1]));
+			} else if(card[0]=='H'){
+				hList.add(convertStrToNum(card[1]));
 			}
-
 		}
-
-		Collections.sort(dList);
-		Collections.sort(cList);
-		Collections.sort(hList);
-		String sep =",";
 
 		if(!sList.isEmpty()){
-			Collections.sort(sList);
-			StringBuilder sb = new StringBuilder();
-			for (int number:sList){
-				sb.append(numReturn(number)).append(sep);
-			}
-			String result = sb.substring(0, sb.length()-1);
-			System.out.print("S:");
-			System.out.println(result);
+			output("S:",sList);
 		}
 		if(!dList.isEmpty()){
-			Collections.sort(dList);
-			StringBuilder sb = new StringBuilder();
-			for (int number:dList){
-				sb.append(numReturn(number)).append(sep);
-			}
-			String result = sb.substring(0, sb.length()-1);
-			System.out.print("D:");
-			System.out.println(result);
+			output("D:",dList);
 		}
 		if(!cList.isEmpty()){
-			Collections.sort(cList);
-			StringBuilder sb = new StringBuilder();
-			for (int number:cList){
-				sb.append(numReturn(number)).append(sep);
-			}
-			String result = sb.substring(0, sb.length()-1);
-			System.out.print("C:");
-			System.out.println(result);
+			output("C:",cList);
 		}
 		if(!hList.isEmpty()){
-			Collections.sort(hList);
-			StringBuilder sb = new StringBuilder();
-			for (int number:hList){
-				sb.append(numReturn(number)).append(sep);
-			}
-			String result = sb.substring(0, sb.length()-1);
-			System.out.print("H:");
-			System.out.println(result);
+			output("H:",hList);
 		}
 	}
-	public static String numReturn(int num){
-		String symbol = null;
-		if(num == 11){
-			symbol="J";
-		} else if (num == 12){
-			symbol="Q";
-		} else if (num == 13){
-			symbol="K";
-		} else if (num == 10){
-			symbol="0";
-		} else if (num == 1){
-			symbol="A";
-		} else {
-			symbol= String.valueOf(num);
-		}
-		return symbol;
+	public static char convertNumToStr(int num){
+		return TRUMP_NUM.charAt(num-1);
 	}
 
-	public static int numChange(String symbol){
-		int num = 0;
-		if(symbol.equals("J")){
-			num = 11;
-		} else if (symbol.equals("Q")){
-			num = 12;
-		} else if (symbol.equals("K")){
-			num = 13;
-		} else if (symbol.equals("0")){
-			num = 10;
-		} else if (symbol.equals("A")){
-			num = 1;
-		} else{
-			num = Integer.parseInt(symbol);
+	public static int convertStrToNum(char symbol){
+		return TRUMP_NUM.indexOf(symbol)+1;
+	}
+
+	static void output(String type, ArrayList<Integer> list){
+		Collections.sort(list);
+		StringBuilder sb = new StringBuilder();
+		sb.append(type);
+		for (int number:list){
+			sb.append(convertNumToStr(number)).append(SEP);
 		}
-		return num;
+		String result = sb.substring(0, sb.length()-1);
+		System.out.println(result);
 	}
 }
