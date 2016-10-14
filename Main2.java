@@ -33,19 +33,10 @@ public class Main2 {
 				hList.add(convertStrToNum(card[1]));
 			}
 		}
-
-		if(!sList.isEmpty()){
 			output("S:",sList);
-		}
-		if(!dList.isEmpty()){
 			output("D:",dList);
-		}
-		if(!cList.isEmpty()){
 			output("C:",cList);
-		}
-		if(!hList.isEmpty()){
 			output("H:",hList);
-		}
 	}
 	public static char convertNumToStr(int num){
 		return TRUMP_NUM.charAt(num-1);
@@ -56,6 +47,9 @@ public class Main2 {
 	}
 
 	static void output(String type, ArrayList<Integer> list){
+		if (list.isEmpty()){
+			return;
+		}
 		Collections.sort(list);
 		StringBuilder sb = new StringBuilder();
 		sb.append(type);
